@@ -411,12 +411,11 @@ void memSetExtraMemMode(bool mode)
 	// boards, whose games need it. Elsewhere the option stays refused: a console
 	// game that works on 32MB is not the place to find out what else assumes it.
 	// The interpreter handles the 128MB map fine, so gate on the recompiler only.
+	//
+	// DevRAM build: the refusal is lifted. The recompiler already runs the 128MB map for the arcade
+	// boards, and this build exists for console mods that need the devkit memory, so let them have it.
 	if (mode && EmuConfig.Cpu.Recompiler.EnableEE && !Arcade::IsActive())
-	{
-		Console.Warning("Extended RAM (128MB) is not supported by the ARM64 EE recompiler; ignoring it. "
-						"Disable the EE recompiler if you need it.");
-		mode = false;
-	}
+		Console.Warning("DevRAM build: Extended RAM (128MB) enabled with the ARM64 EE recompiler.");
 #endif
 
 	s_extra_memory = mode;
