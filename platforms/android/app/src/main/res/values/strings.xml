@@ -3,4 +3,5 @@
     <!-- Home-screen label for nightlies, which install as a separate package (com.armsx2.nightly)
          so they sit beside the stable app rather than replacing it. -->
     <string name="app_name_nightly">ARMSX2 Nightly</string>
+    <string name="app_name_devram">ARMSX2 Dev 128Mo</string>
 </resources>

@@ -945,6 +945,9 @@ data class Settings(
 
     /** Push every field into emucore via NativeApp.setSetting + commit. */
     fun applyTo() {
+        // DevRAM build: always expose the devkit memory map (EE 128 MB / IOP 8 MB),
+        // like PCSX2's "Enable Extended RAM (Dev Console)". Takes effect at game boot.
+        put("EmuCore/CPU", "ExtraMemory", "bool", "true")
         // Speedhacks
         put("EmuCore/Speedhacks", "EECycleRate", "int", cpu.eeCycleRate.toString())
         put("EmuCore/Speedhacks", "EECycleSkip", "int", cpu.eeCycleSkip.toString())
