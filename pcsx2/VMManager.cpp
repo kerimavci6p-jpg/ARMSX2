@@ -2231,6 +2231,11 @@ VMBootResult VMManager::Initialize(const VMBootParameters& boot_params, Error* e
 	UpdateCPUImplementations();
 	mmap_ResetBlockTracking();
 	memSetExtraMemMode(EmuConfig.Cpu.ExtraMemory);
+	// DevRAM build: show at boot how much RAM the game really gets, so a 32 MB fallback is visible.
+	Host::AddIconOSDMessage("DevRamSize", ICON_FA_MICROCHIP,
+		fmt::format("DevRAM : EE {} Mo / IOP {} Mo{}", Ps2MemSize::ExposedRam / _1mb, Ps2MemSize::ExposedIopRam / _1mb,
+			memGetExtraMemMode() ? " (128 Mo ACTIF)" : " (32 Mo - mode dev INACTIF)"),
+		Host::OSD_INFO_DURATION * 3);
 	vuAotResetStickyTripwire();
 	EECycleRate::SyncToConfigured();
 	EECycleRateSampler::OnVMStart();
